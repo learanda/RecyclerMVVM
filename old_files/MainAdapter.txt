@@ -1,0 +1,86 @@
+package ar.leandro.recyclermvvm
+
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import ar.leandro.recyclermvvm.model.Usuario
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.item_row.view.*
+
+/* El adaptador recibe un array de datos y se lo va a meter al recycler view, para que el rv agarre
+// cada elemento y ponga esos datos que le estamos mandando.
+// Básicamente el corazón del rv está en el adaptador que usa para ponerle datos al rv
+
+// El ViewHolder se va a encargar de inicializar las vistas que tenemos en el item_row para poder
+// ponerle datos, el adaptador va a ser el que le va a poner datos a los elementos de cada View y
+// vamos a usar el rv para mostrar esos elementos de una manera en forma de lista */
+class MainAdapter(private val context: Context): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
+    /* Se implementan los 3 métodos del adapter (implement members)
+
+    // Los ViewType son por si necesitamos mostrar distintas vistas en el rv, quiere decir, si
+    // va a haber más de una vista y son distintas, el viewtype se va a encargar de switchear entre
+    // las distintas vistas dependiendo de una condicion para mostrarlas en el rv
+    // El parent es el "container" que va a encerrar todos estos datos
+    // El onCreateViewHolder en si, lo que nos va a retornar es una vista, esa vista que se retorna
+    // es en este caso el item_row */
+
+    private var dataList = mutableListOf<Usuario>() // hasta aca es una lista vacía
+    private lateinit var lInflater:LayoutInflater
+
+    fun setListData(data:MutableList<Usuario>){
+        dataList = data
+        // se setea la informacion de la lista
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
+        val view:View = lInflater.inflate(R.layout.item_row,parent,false)
+        // el viewGroup es el parent, y el attach en false, sirve para que no lo atache ahora a esta
+        // vista en el recycler, pero lo va a atachar luego cuando sea necesario,
+        // ¿Cuándo es necesario? Cuando tengamos los datos
+        return MainViewHolder(view)
+        // basicamente en este metodo traemos la vista (el item_row) con el LayoutInflater y la
+        // pasamos dentro del ViewHolder **
+
+    }
+
+    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+        // bindea datos dentro del viewHolder, esos datos son los que le vamos a pasar como un array * array arriba
+
+        // creamos un objeto Usuario, le pasamos el dataList y en cada posicion del datalist deberiamos
+        // obtener el objeto entero del usuario
+        val user: Usuario = dataList[position]   // ahora se va a saber que contenido tiene cada elemento
+        holder.bindView(user)
+    }
+
+    override fun getItemCount(): Int {
+        return dataList.size
+        // si no implementamos este metodo puede que tire un "indexOutOfBounds", porque no está el tamaño del array
+    }
+
+    inner class MainViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
+    /* A esta inner class le tenemos que pasar una vista que necesitamos inflar, le pasamos la vista
+    // para que el ViewHolder haga el findViewByID, encuentre los elementos y le meta los datos que
+    // le vamos a pasar al adaptador
+    // Con esto ya tenemos creado el ViewHolder
+
+    // ** Como ahora tenemos la vista dentro del ViewHolder, ahora vamos a poder referenciar a las
+    // vistas para ponerle los datos
+
+    // innerclass tiene la ventaja de que al ser que está dentro de la clase MainAdapter, esta es una
+    // clase hija (digamos) de la clase MainAdapter, entonces cuando la clase madre muera, la clase
+    // inner tambien muere, esto es importante porque al momento que hacemos una instancia del
+    // MainAdapter en nuestro MainActivity, y no tenemos inner class, lo que va a pasar es que
+    // va a generar otra instancia tambien para otra clase, y la instancia que ya tenia va a seguir viva
+    // cosa que no se necesita y va a ocupar memoria
+     */
+
+        fun bindView(user: Usuario){ // le paso un objeto, el usuario que vamos a crear en este caso
+            // acá le vamos a pasar los datos de la vista, que vienen del onBindViewHolder
+            Glide.with(context).load(user.imageUrl).into(itemView.circleImageView)  // bindeo la imagen en la imageView
+            itemView.tv_title.text = user.nombre
+            itemView.tv_description.text = user.descripcion
+        }
+    }
+}

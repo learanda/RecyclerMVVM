@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "48881419209",
+    "project_id": "recycler-y-mvvm",
+    "storage_bucket": "recycler-y-mvvm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48881419209:android:a42c76a180361fdcb39e18",
+        "android_client_info": {
+          "package_name": "ar.leandro.recyclermvvm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48881419209-0vh315mqdtv6c03g6cnifoigb0a1jbro.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ar.leandro.recyclermvvm",
+            "certificate_hash": "e3b6f315ef93f2511486da33e752d1bf65ce3d55"
+          }
+        },
+        {
+          "client_id": "48881419209-nb8hrja19vih2n5rdujfqbka02t2l9s7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyxPYga9QHZ1RMqwTOX6N65FhMjAhqp3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "48881419209-nb8hrja19vih2n5rdujfqbka02t2l9s7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

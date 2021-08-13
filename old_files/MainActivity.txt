@@ -1,0 +1,43 @@
+package ar.leandro.recyclermvvm
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_main.*
+
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var adapter:MainAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        adapter = MainAdapter(this)
+
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = MainAdapter(this)
+        /* le seteo el adaptador al rv, al hacer esto le estoy indicando que adaptador tiene el rv
+        // y este adaptador lo que hace es obtener informacion, colocarla dentro de cada elemento del
+        // item_row y lo infla */
+
+        val dummyList = mutableListOf<Usuario>()
+        dummyList.add(Usuario("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.muycomputer.com%2F2019%2F12%2F19%2Ffragmentacion-en-android-estadisticas%2F&psig=AOvVaw2oNiQQx6MwOsr0az5zG9cg&ust=1628624879666000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJCwvuvapPICFQAAAAAdAAAAABAD",
+        "Sociedad Androide", "Tutoriales para Android Studio"))
+        // aca ya tengo un elemento en la lista
+        dummyList.add(Usuario("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.muycomputer.com%2F2019%2F12%2F19%2Ffragmentacion-en-android-estadisticas%2F&psig=AOvVaw2oNiQQx6MwOsr0az5zG9cg&ust=1628624879666000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJCwvuvapPICFQAAAAAdAAAAABAD",
+            "Sociedad Androide", "Tutoriales para Android Studio"))
+        dummyList.add(Usuario("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.muycomputer.com%2F2019%2F12%2F19%2Ffragmentacion-en-android-estadisticas%2F&psig=AOvVaw2oNiQQx6MwOsr0az5zG9cg&ust=1628624879666000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJCwvuvapPICFQAAAAAdAAAAABAD",
+            "Sociedad Androide", "Tutoriales para Android Studio"))
+
+        // ahora se debe setear la lista en el adapter
+        adapter.setListData(dummyList)
+        /* al hacer esto le mandamos la informacion al adapter, pero todavia no actualizamos el adapter, o el rv para mostrar esa informacion
+        // para eso se usa el notifyDataSetChange, porque una vez que seteamos la lista, notificamos al aldaptador que ya seteamos la lista
+        // y el adaptador (con este notify) vuelve a invocar al onCreateViewHolder y onBindViewHolder
+        // y vuelve a bindear otra vez los datos para esta lista */
+
+        adapter.notifyDataSetChanged()
+    }
+}
