@@ -38,6 +38,10 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnAnimalClickListener 
             Animal(
                 "Tigre",
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Siberischer_tiger_de_edit02.jpg/1200px-Siberischer_tiger_de_edit02.jpg"
+            ),
+            Animal(
+                "Loro",
+                "https://estaticos-cdn.elperiodico.com/clip/9a36bb77-0c88-4b3c-a7dc-f3d41dd85987_alta-libre-aspect-ratio_default_0.jpg"
             )
         )
 
@@ -45,8 +49,8 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnAnimalClickListener 
     }
 
     override fun onImageClick(imagen: String) {
-        val intent = Intent(this,ImageDetail::class.java)
-        intent.putExtra("imageUrl",imagen)
+        val intent = Intent(this, ImageDetail::class.java)
+        intent.putExtra("imageUrl", imagen)
         startActivity(intent)
     }
 
